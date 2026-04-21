@@ -1,21 +1,42 @@
 import { Button, StyleSheet, Text, TextInput, View } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 
 const Login = () => {
+  const [userData, setUserData] = useState({
+    email: "",
+    password: "",
+  });
+  const inputHandler = (name, value) => {
+    setUserData({ ...userData, [name]: value });
+  };
+  const loginHandler = () => {
+    console.log(userData);
+    setUserData();
+  };
   return (
     <View style={styles.container}>
       <Text style={{ fontWeight: "bold", fontSize: 32 }}>Login</Text>
       <View style={styles.card}>
         <View style={styles.vInp}>
           <Text style={styles.txt}>Email</Text>
-          <TextInput style={styles.inp} />
+          <TextInput
+            style={styles.inp}
+            onChangeText={(txt) => {
+              inputHandler("email", txt);
+            }}
+          />
         </View>
         <View style={styles.vInp}>
           <Text style={styles.txt}>Password</Text>
-          <TextInput style={styles.inp} />
+          <TextInput
+            style={styles.inp}
+            onChangeText={(txt) => {
+              inputHandler("password", txt);
+            }}
+          />
         </View>
         <View style={styles.btn}>
-          <Button title="Login" />
+          <Button title="Login" onPress={loginHandler} />
         </View>
       </View>
     </View>
