@@ -1,7 +1,34 @@
 import { Button, StyleSheet, Text, TextInput, View } from "react-native";
-import React from "react";
+// ///////////////////  Importation required to assure firebase connectivity ///////////////////////////////
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import "firebase/firestore";
+import firebase from "../../Firebase";
+////////////////////////////////////////////////////////////////////////////////////////////////////////////
+import { useState } from "react";
 
 const Register = () => {
+  const [userData, setUserData] = useState({
+    email: "",
+    password: "",
+  });
+  const [error, setError] = useState(null);
+  const inputHandler = (name, value) => {
+    setUserData({ ...userData, [name]: value });
+  };
+  const registerHandler = () => {
+    const auth = getAuth();
+    createUserWithEmailAndPassword(auth, userData.email, userData.password)
+      .then((userCredential) => {
+        // Signed up
+        const user = userCredential.user;
+        console.log("New User: ", user);
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(errorCode, "-", errorMessage);
+      });
+  };
   return (
     <View style={styles.container}>
       <Text style={{ fontWeight: "bold", fontSize: 32 }}>Register</Text>
@@ -10,24 +37,24 @@ const Register = () => {
           <Text style={styles.txt}>Email</Text>
           <TextInput
             style={styles.inp}
-            //   onChangeText={(txt) => {
-            //     inputHandler("email", txt);
-            //   }}
-            //   value={userData.email}
+            onChangeText={(txt) => {
+              inputHandler("email", txt);
+            }}
+            value={userData.email}
           />
         </View>
         <View style={styles.vInp}>
           <Text style={styles.txt}>Password</Text>
           <TextInput
             style={styles.inp}
-            //   onChangeText={(txt) => {
-            //     inputHandler("password", txt);
-            //   }}
-            //   value={userData.password}
+            onChangeText={(txt) => {
+              inputHandler("password", txt);
+            }}
+            value={userData.password}
           />
         </View>
         <View style={styles.btn}>
-          <Button title="Register" />
+          <Button title="Register" onPress={registerHandler} />
         </View>
       </View>
     </View>
