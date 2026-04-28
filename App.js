@@ -3,6 +3,7 @@ import { StyleSheet, Text, View } from "react-native";
 import TestComp from "./src/components/TestComp";
 import { useState } from "react";
 import Login from "./src/screens/Login";
+import Register from "./src/screens/Register";
 
 export default function App() {
   const name = "Firas";
@@ -18,7 +19,8 @@ export default function App() {
       </Text>
       <TestComp name={name} getData={getData} />
       <StatusBar style="auto" /> */}
-      <Login />
+      {/* <Login /> */}
+      <Register />
     </View>
   );
 }
