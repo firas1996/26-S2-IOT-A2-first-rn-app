@@ -1,10 +1,10 @@
-import { StyleSheet, Text, View } from "react-native";
+import { Button, StyleSheet, Text, TextInput, View } from "react-native";
 import React from "react";
 
 const Register = () => {
   return (
     <View style={styles.container}>
-      <Text style={{ fontWeight: "bold", fontSize: 32 }}>Login</Text>
+      <Text style={{ fontWeight: "bold", fontSize: 32 }}>Register</Text>
       <View style={styles.card}>
         <View style={styles.vInp}>
           <Text style={styles.txt}>Email</Text>
@@ -27,7 +27,7 @@ const Register = () => {
           />
         </View>
         <View style={styles.btn}>
-          <Button title="Login" />
+          <Button title="Register" />
         </View>
       </View>
     </View>
@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
     marginTop: 25,
     padding: 12,
     borderColor: "gray",
-    backgroundColor: "#f6f98f",
+    backgroundColor: "#8ff9cb",
   },
   vInp: {
     alignItems: "flex-start",
