@@ -1,7 +1,21 @@
 import { Button, StyleSheet, Text, View } from "react-native";
-import React from "react";
+import React, { useEffect } from "react";
+import axios from "axios";
 
 const Home = () => {
+  useEffect(() => {
+    getData();
+  }, []);
+  const getData = () => {
+    axios
+      .get("http://10.33.5.4:1122/api/mqtt")
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  };
   return (
     <View style={styles.container}>
       <Button title="Get MQTT Data" />
